@@ -1,6 +1,7 @@
 package com.icia.member.controller;
 
 import com.icia.member.dto.MemberDTO;
+import com.icia.member.dto.MemberFileDTO;
 import com.icia.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -57,12 +58,18 @@ public class MemberController {
             session.setAttribute("loginEmail", memberDTO.getMemberEmail());
             return "memberMy";
         }else{
-            return "LoginFalse";
+            return "index";
         }
     }
 
     @GetMapping("/myPage")
-    public String myPage(){
+    public String myPage(@RequestParam("loginEmail") String loginEmail, Model model){
+        MemberDTO memberDTO = memberService.findByMemberEmail(loginEmail);
+        model.addAttribute("member",memberDTO);
+        if(memberDTO.getMemberProfile() == 1){
+            MemberFileDTO memberFileDTO = memberService.findFile(memberDTO.getId());
+            model.addAttribute("memberFile", memberFileDTO);
+        }
         return "memberMy";
     }
 

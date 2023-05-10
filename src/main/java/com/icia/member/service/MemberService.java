@@ -75,4 +75,9 @@ public class MemberService {
     public void update(MemberDTO memberDTO) {
         memberRepository.update(memberDTO);
     }
+
+    public MemberFileDTO findFile(Long id) {
+        return memberRepository.findFile(id);
+
+    }
 }

@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
   <title>Title</title>
@@ -17,7 +18,14 @@
 <%@include file="./conponent/header.jsp"%>
 <%@include file="./conponent/nav.jsp"%>
 <div id="section">
+
   ${sessionScope.loginEmail} 님 환영해요!
+    <div id="file">
+    <c:if test="${member.memberProfile == 1}">
+        <img src="${pageContext.request.contextPath}/upload/${memberFile.storedFileName}" alt="" width="100" height="100">
+    </c:if>
+    </div>
+    ${member.memberProfile}
     <button onclick="update()">회원정보수정</button>
 
 </div>
@@ -28,5 +36,7 @@
   const update = () => {
     location.href="/member/updatePass";
   }
+
+
 </script>
 </html>

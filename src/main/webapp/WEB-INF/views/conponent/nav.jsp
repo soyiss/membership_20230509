@@ -21,7 +21,7 @@
         <li class="login-name">
             <c:choose>
                 <c:when test="${sessionScope.loginEmail != null}">
-                    <a href="/member/myPage" style="color: white;">${sessionScope.loginEmail} 님 환영해요!</a>
+                    <a href="/member/myPage?loginEmail=${sessionScope.loginEmail}" style="color: white;">${sessionScope.loginEmail} 님 환영해요!</a>
                     <a href="/member/logout">logout</a>
                 </c:when>
 <%--                <c:otherwise>--%>

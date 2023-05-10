@@ -32,4 +32,8 @@ public class MemberRepository {
     public void update(MemberDTO memberDTO) {
         sql.update("Member.update", memberDTO);
     }
+
+    public MemberFileDTO findFile(Long id) {
+        return sql.selectOne("Member.findFile",id);
+    }
 }

@@ -26,4 +26,8 @@
     <update id="update" parameterType="member">
         update member_table set memberPassword=#{memberPassword}, memberName=#{memberName}, memberMobile=#{memberMobile} where id=#{id}
     </update>
+
+    <select id="findFile" parameterType="Long" resultType="memberFile">
+        select * from member_file_table where memberId=#{memberId}
+    </select>
 </mapper>

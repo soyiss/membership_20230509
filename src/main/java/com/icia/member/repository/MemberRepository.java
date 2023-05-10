@@ -28,4 +28,8 @@ public class MemberRepository {
     public void saveFile(MemberFileDTO memberFileDTO) {
         sql.selectOne("Member.saveFile",memberFileDTO);
     }
+
+    public void update(MemberDTO memberDTO) {
+        sql.update("Member.update", memberDTO);
+    }
 }

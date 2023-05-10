@@ -23,4 +23,7 @@
         select * from member_table where memberEmail=#{memberEmail}
     </select>
 
+    <update id="update" parameterType="member">
+        update member_table set memberPassword=#{memberPassword}, memberName=#{memberName}, memberMobile=#{memberMobile} where id=#{id}
+    </update>
 </mapper>

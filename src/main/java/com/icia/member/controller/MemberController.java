@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -63,6 +64,28 @@ public class MemberController {
     @GetMapping("/myPage")
     public String myPage(){
         return "memberMy";
+    }
+
+    @GetMapping("/updatePass")
+    public String updateForm(HttpSession session, Model model){
+        String loginEmail = (String)session.getAttribute("loginEmail");
+        MemberDTO memberDTO = memberService.findByMemberEmail(loginEmail);
+        model.addAttribute("member", memberDTO);
+        return "memberUpdatePass";
+    }
+
+    @PostMapping("/updatePass")
+    public String updatePass(HttpSession session, Model model){
+        String loginEmail = (String)session.getAttribute("loginEmail");
+        MemberDTO memberDTO = memberService.findByMemberEmail(loginEmail);
+        model.addAttribute("member", memberDTO);
+        return "memberUpdate";
+    }
+
+    @PostMapping("/update")
+    public String update(@ModelAttribute MemberDTO memberDTO){
+        memberService.update(memberDTO);
+        return "redirect:/";
     }
 
     @GetMapping("/logout")

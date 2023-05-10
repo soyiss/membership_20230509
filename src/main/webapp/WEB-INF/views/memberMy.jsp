@@ -18,9 +18,15 @@
 <%@include file="./conponent/nav.jsp"%>
 <div id="section">
   ${sessionScope.loginEmail} 님 환영해요!
+    <button onclick="update()">회원정보수정</button>
 
 </div>
 
 <%@include file="./conponent/footer.jsp"%>
 </body>
+<script>
+  const update = () => {
+    location.href="/member/updatePass";
+  }
+</script>
 </html>

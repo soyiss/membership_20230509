@@ -15,8 +15,8 @@
 </head>
 <body>
 
-<%@include file="./conponent/header.jsp"%>
-<%@include file="./conponent/nav.jsp"%><br>
+<%@include file="../conponent/header.jsp"%>
+<%@include file="../conponent/nav.jsp"%><br>
 <div id="section">
 
   <form action="/member/save" method="post" id="save-form"  enctype="multipart/form-data">
@@ -33,7 +33,7 @@
   </form>
 </div>
 
-<%@include file="./conponent/footer.jsp"%>
+<%@include file="../conponent/footer.jsp"%>
 </body>
 <script>
 

@@ -22,14 +22,14 @@ public class MemberController {
 
     @GetMapping("/save")
     public String saveForm(){
-        return "memberSave";
+        return "/membership/memberSave";
     }
 
     @PostMapping("/save")
     public String save(@ModelAttribute MemberDTO memberDTO) throws IOException {
         System.out.println("memberDTO = " + memberDTO);
         memberService.save(memberDTO);
-        return "success";
+        return "/membership/success";
     }
 
     @PostMapping("/email-check")
@@ -47,7 +47,7 @@ public class MemberController {
 
     @GetMapping("/login")
     public String loginForm(){
-        return "memberLogin";
+        return "/membership/memberLogin";
     }
 
     @PostMapping("/login")
@@ -56,7 +56,7 @@ public class MemberController {
         // loginResult가 true이면
         if(loginResult){
             session.setAttribute("loginEmail", memberDTO.getMemberEmail());
-            return "memberMy";
+            return "/membership/memberMy";
         }else{
             return "index";
         }
@@ -70,7 +70,7 @@ public class MemberController {
             MemberFileDTO memberFileDTO = memberService.findFile(memberDTO.getId());
             model.addAttribute("memberFile", memberFileDTO);
         }
-        return "memberMy";
+        return "/membership/memberMy";
     }
 
     @GetMapping("/updatePass")
@@ -78,7 +78,7 @@ public class MemberController {
         String loginEmail = (String)session.getAttribute("loginEmail");
         MemberDTO memberDTO = memberService.findByMemberEmail(loginEmail);
         model.addAttribute("member", memberDTO);
-        return "memberUpdatePass";
+        return "/membership/memberUpdatePass";
     }
 
     @PostMapping("/updatePass")
@@ -86,7 +86,7 @@ public class MemberController {
         String loginEmail = (String)session.getAttribute("loginEmail");
         MemberDTO memberDTO = memberService.findByMemberEmail(loginEmail);
         model.addAttribute("member", memberDTO);
-        return "memberUpdate";
+        return "/membership/memberUpdate";
     }
 
     @PostMapping("/update")

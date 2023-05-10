@@ -15,8 +15,8 @@
 </head>
 <body>
 
-<%@include file="./conponent/header.jsp"%>
-<%@include file="./conponent/nav.jsp"%>
+<%@include file="../conponent/header.jsp"%>
+<%@include file="../conponent/nav.jsp"%>
 <div id="section">
 
   ${sessionScope.loginEmail} 님 환영해요!
@@ -30,7 +30,7 @@
 
 </div>
 
-<%@include file="./conponent/footer.jsp"%>
+<%@include file="../conponent/footer.jsp"%>
 </body>
 <script>
   const update = () => {

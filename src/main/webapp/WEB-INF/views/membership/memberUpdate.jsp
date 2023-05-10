@@ -14,8 +14,8 @@
 </head>
 <body>
 
-<%@include file="./conponent/header.jsp"%>
-<%@include file="./conponent/nav.jsp"%>
+<%@include file="../conponent/header.jsp"%>
+<%@include file="../conponent/nav.jsp"%>
 <div id="section">
   <form action="/member/update" method="post" name="updateForm">
     <input type="text" name="id" value="${member.id}" readonly> <br>
@@ -27,7 +27,7 @@
   </form>
 </div>
 
-<%@include file="./conponent/footer.jsp"%>
+<%@include file="../conponent/footer.jsp"%>
 </body>
 <script>
   // 비밀번호 확인 메소드

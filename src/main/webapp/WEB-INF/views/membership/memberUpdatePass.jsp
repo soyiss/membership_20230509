@@ -14,15 +14,15 @@
 </head>
 <body>
 
-<%@include file="./conponent/header.jsp"%>
-<%@include file="./conponent/nav.jsp"%>
+<%@include file="../conponent/header.jsp"%>
+<%@include file="../conponent/nav.jsp"%>
 <div id="section">
   <form action="/member/updatePass" method="post" name="updateForm">
   <input type="text" name="memberPassword" id="memberPassword" placeholder="현재 비밀번호를 입력해주세요">
   <input type="button" onclick="pass_check()" value="비밀번호 확인">
 </div>
 
-<%@include file="./conponent/footer.jsp"%>
+<%@include file="../conponent/footer.jsp"%>
 </body>
 <script>
   // 비밀번호 확인 메소드

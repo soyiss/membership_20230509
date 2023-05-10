@@ -14,8 +14,8 @@
 </head>
 <body>
 
-<%@include file="./conponent/header.jsp"%>
-<%@include file="./conponent/nav.jsp"%><br>
+<%@include file="../conponent/header.jsp"%>
+<%@include file="../conponent/nav.jsp"%><br>
 <div id="section">
 
   <form action="/member/login" method="post" id="save-form">
@@ -27,7 +27,7 @@
   </form>
 </div>
 
-<%@include file="./conponent/footer.jsp"%>
+<%@include file="../conponent/footer.jsp"%>
 </body>
 <script>
   <!-- 이벤트 리스너 적용 -->

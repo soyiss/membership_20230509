@@ -24,14 +24,10 @@ public class MemberController {
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute MemberDTO memberDTO){
+    public String save(@ModelAttribute MemberDTO memberDTO) throws IOException {
         System.out.println("memberDTO = " + memberDTO);
-        boolean result = memberService.save(memberDTO);
-        if(result) {
-            return "success";
-        }else{
-            return "errorPage";
-        }
+        memberService.save(memberDTO);
+        return "success";
     }
 
     @PostMapping("/email-check")

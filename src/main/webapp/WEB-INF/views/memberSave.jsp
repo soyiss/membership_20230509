@@ -19,7 +19,7 @@
 <%@include file="./conponent/nav.jsp"%><br>
 <div id="section">
 
-  <form action="/member/save" method="post" id="save-form">
+  <form action="/member/save" method="post" id="save-form"  enctype="multipart/form-data">
     <input type="text" name="memberEmail" placeholder="이메일" id="member-email" onblur="email_check()"><br>
     <p id="check-result"></p>
     <input type="text" name="memberPassword" placeholder="비밀번호" id="member-password" onblur="password_check()"><br>
@@ -28,6 +28,7 @@
     <p></p>
     <input type="text" name="memberMobile" placeholder="전화번호" id="member-mobile" onblur="mobile_check()"><br>
     <p id="mobile-rule"></p>
+    <input type="file" name="memberFile"> <br>
     <input type="submit" value="가입">
   </form>
 </div>

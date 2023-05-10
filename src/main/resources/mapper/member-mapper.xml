@@ -5,9 +5,14 @@
 
 <mapper namespace="Member">
 
-    <insert id="save" parameterType="member">
-        insert into member_table(memberEmail,memberPassword,memberName,memberMobile)
-            values(#{memberEmail},#{memberPassword},#{memberName},#{memberMobile})
+    <insert id="save" parameterType="member" useGeneratedKeys="true" keyProperty="id">
+        insert into member_table(memberEmail,memberPassword,memberName,memberMobile,memberProfile)
+            values(#{memberEmail},#{memberPassword},#{memberName},#{memberMobile},#{memberProfile})
+    </insert>
+
+    <insert id="saveFile" parameterType="memberFile">
+        insert into member_file_table(originalFileName, storedFileName, memberId)
+        values (#{originalFileName}, #{storedFileName}, #{memberId})
     </insert>
 
     <select id="login" parameterType="member" resultType="member">
@@ -17,4 +22,5 @@
     <select id="findByMemberEmail" parameterType="String" resultType="member">
         select * from member_table where memberEmail=#{memberEmail}
     </select>
+
 </mapper>

@@ -19,12 +19,35 @@
 <div id="section">
 
   <form action="/member/login" method="post" id="save-form">
-    <input type="text" name="memberEmail" placeholder="이메일"><br>
-    <input type="text" name="memberPassword" placeholder="비밀번호"><br>
+    <input type="text" name="memberEmail" id="member-email" placeholder="이메일"><br>
+    <p></p>
+    <input type="text" name="memberPassword" id="member-password" placeholder="비밀번호"><br>
+    <p></p>
     <input type="submit" value="login">
   </form>
 </div>
 
 <%@include file="./conponent/footer.jsp"%>
 </body>
+<script>
+  <!-- 이벤트 리스너 적용 -->
+  const saveForm = document.getElementById("save-form");
+  saveForm.addEventListener("submit", function (e) {
+    e.preventDefault(); // 해당 요소의 기본 동작을 수행하지 않을 때
+    // 로그인 버튼을 아무리 눌러도 서브밋을 막음
+
+    const email = document.getElementById("member-email");
+    const password = document.getElementById("member-password");
+    if(email.value == ""){
+      alert("이메일을 입력하세요");
+      email.focus();
+    }else if(password.value == ""){
+      alert("비밀번호를 입력하세요");
+      password.focus();
+    }else{
+      saveForm.submit();
+    }
+
+  });
+</script>
 </html>

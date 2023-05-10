@@ -10,4 +10,11 @@
             values(#{memberEmail},#{memberPassword},#{memberName},#{memberMobile})
     </insert>
 
+    <select id="login" parameterType="member" resultType="member">
+        select * from member_table where memberEmail=#{memberEmail} and memberPassword=#{memberPassword}
+    </select>
+
+    <select id="findByMemberEmail" parameterType="String" resultType="member">
+        select * from member_table where memberEmail=#{memberEmail}
+    </select>
 </mapper>

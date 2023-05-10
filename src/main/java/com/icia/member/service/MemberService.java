@@ -13,7 +13,21 @@ public class MemberService {
     @Autowired
     private MemberRepository memberRepository;
 
-    public void save(MemberDTO memberDTO) {
-        memberRepository.save(memberDTO);
+    public boolean save(MemberDTO memberDTO) {
+        return memberRepository.save(memberDTO);
+    }
+
+    public boolean login(MemberDTO memberDTO) {
+        MemberDTO dto = memberRepository.login(memberDTO);
+        if(dto != null){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
+    public MemberDTO findByMemberEmail(String loginEmail) {
+        return memberRepository.findByMemberEmail(loginEmail);
     }
 }

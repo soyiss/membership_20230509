@@ -16,22 +16,30 @@
             <a href="/member/login">login</a>
         </li>
         <li>
-            <a href="">List</a>
+            <a href="/">List</a>
         </li>
-        <li class="login-name" id="login-area">
-
+        <li class="login-name">
+            <c:choose>
+                <c:when test="${sessionScope.loginEmail != null}">
+                    <a href="/member/myPage" style="color: white;">${sessionScope.loginEmail} 님 환영해요!</a>
+                    <a href="/member/logout">logout</a>
+                </c:when>
+<%--                <c:otherwise>--%>
+<%--                    <a href="/member/login">login</a>--%>
+<%--                </c:otherwise>--%>
+            </c:choose>
         </li>
     </ul>
 </div>
 
-<script>
-    const loginArea = document.getElementById("login-area");
-    const loginEmail = '${sessionScope.loginEmail}';
-    console.log(loginEmail.length);
-    if (loginEmail.length != 0) {
-        loginArea.innerHTML = "<a href='/mypage' style='color: black;'>"+loginEmail +"님 환영해요!</a>"+
-            "<a href='/logout'>logout</a>";
-    } else {
-        loginArea.innerHTML = "<a href='/login'>login</a>";
-    }
-</script>
+<%--<script>--%>
+<%--    const loginArea = document.getElementById("login-area");--%>
+<%--    const loginEmail = '${sessionScope.loginEmail}';--%>
+<%--    console.log(loginEmail.length);--%>
+<%--    if (loginEmail.length != 0) {--%>
+<%--        loginArea.innerHTML = "<a href='/mypage' style='color: white;'>"+loginEmail +"님 환영해요!</a>"+--%>
+<%--            "<a href='/logout'>logout</a>";--%>
+<%--    } else {--%>
+<%--        loginArea.innerHTML = "<a href='/login'>login</a>";--%>
+<%--    }--%>
+<%--</script>--%>

@@ -5,9 +5,14 @@
 
 <mapper namespace="Board">
 
-    <insert id="save" parameterType="board">
-        insert into board_table(memberId, boardTitle, boardContents, boardWriter)
-        values (#{memberId}, #{boardTitle}, #{boardContents}, #{boardWriter})
+    <insert id="save" parameterType="board" useGeneratedKeys="true" keyProperty="id">
+        insert into board_table(memberId, boardTitle, boardContents, boardWriter, fileAttached)
+        values (#{memberId}, #{boardTitle}, #{boardContents}, #{boardWriter} ,#{fileAttached})
+    </insert>
+
+    <insert id="saveFile" parameterType="boardFile">
+        insert into board_file_table(originalFileName, storedFileName, boardId)
+        values (#{originalFileName}, #{storedFileName}, #{boardId})
     </insert>
 
 </mapper>

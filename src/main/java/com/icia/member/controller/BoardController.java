@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/board")
@@ -30,7 +31,7 @@ public class BoardController {
         return "/boards/boardWrite";
     }
     @PostMapping("/write")
-    public String boardWriter(HttpSession session, @ModelAttribute BoardDTO boardDTO){
+    public String boardWriter(HttpSession session, @ModelAttribute BoardDTO boardDTO) throws IOException {
         String loginEmail = (String)session.getAttribute("loginEmail");
         MemberDTO memberDTO = memberService.findByMemberEmail(loginEmail);
         boardDTO.setMemberId(memberDTO.getId());

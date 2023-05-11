@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 //공통된 주소값을 밖으로 뺄 수있다
@@ -56,9 +57,9 @@ public class MemberController {
         // loginResult가 true이면
         if(loginResult){
             session.setAttribute("loginEmail", memberDTO.getMemberEmail());
-            return "/membership/memberMy";
+            return "/boards/boardList";
         }else{
-            return "index";
+            return "/membership/memberLoginError";
         }
     }
 
@@ -101,5 +102,37 @@ public class MemberController {
         session.invalidate();
         return "redirect:/";
     }
+
+    @GetMapping("/deletePass")
+    public String deleteForm(HttpSession session, Model model){
+        String loginEmail = (String)session.getAttribute("loginEmail");
+        MemberDTO memberDTO = memberService.findByMemberEmail(loginEmail);
+        model.addAttribute("member", memberDTO);
+        return "/membership/deletePass";
+    }
+    @PostMapping("/deletePass")
+    public String delete(HttpSession session, Model model){
+        String loginEmail = (String)session.getAttribute("loginEmail");
+        MemberDTO memberDTO = memberService.findByMemberEmail(loginEmail);
+        model.addAttribute("member", memberDTO);
+        memberService.delete(memberDTO);
+        return "/membership/memberDelete";
+    }
+
+    @GetMapping("/manager")
+    public String managerForm(Model model){
+        List<MemberDTO> memberDTOList = memberService.findAll();
+        model.addAttribute("memberList", memberDTOList);
+        return "/membership/managerPage";
+    }
+
+    @GetMapping("/managerDelete")
+    public String managerDelete(@ModelAttribute MemberDTO memberDTO){
+        System.out.println("memberDTO = " + memberDTO);
+        memberService.delete(memberDTO);
+        return "redirect:/member/manager";
+//        redirect는 메소드로 넘겨야됨(jsp로 안됨)
+    }
+
 
 }

@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: user
-  Date: 2023-05-10
-  Time: 오후 4:13
+  Date: 2023-05-11
+  Time: 오전 10:17
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -17,9 +17,9 @@
 <%@include file="../conponent/header.jsp"%>
 <%@include file="../conponent/nav.jsp"%>
 <div id="section">
-  <form action="/member/updatePass" method="post" name="updateForm">
-  <input type="text" name="memberPassword" id="memberPassword" placeholder="현재 비밀번호를 입력해주세요">
-  <input type="button" onclick="pass_check()" value="비밀번호 확인">
+  <form action="/member/deletePass" method="post" name="deleteForm">
+    <input type="text" name="memberPassword" id="memberPassword" placeholder="현재 비밀번호를 입력해주세요">
+    <input type="button" onclick="pass_check()" value="비밀번호 확인">
 </div>
 
 <%@include file="../conponent/footer.jsp"%>
@@ -32,7 +32,7 @@
     // 서버에 저장되있는 비밀번호
     const DBPass = '${member.memberPassword}';
     if (inputPass == DBPass) {
-      document.updateForm.submit();
+      document.deleteForm.submit();
     } else {
       alert("비밀번호가 일치하지 않습니다! 다시 입력해주세요");
     }

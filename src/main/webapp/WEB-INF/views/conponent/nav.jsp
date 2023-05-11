@@ -8,26 +8,24 @@
                 <i class="bi bi-house"></i>
             </a>
         </li>
-
-        <li>
-            <a href="/member/save">sign-up</a>
-        </li>
-        <li>
-            <a href="/member/login">login</a>
-        </li>
-        <li>
-            <a href="/">List</a>
-        </li>
         <li class="login-name">
             <c:choose>
                 <c:when test="${sessionScope.loginEmail != null}">
-                    <a href="/member/myPage?loginEmail=${sessionScope.loginEmail}" style="color: white;">${sessionScope.loginEmail} 님 환영해요!</a>
-                    <a href="/member/logout">logout</a>
+                    <a href="/board/write" class="right">Write</a>
+                    <a href="/board/boardList" class="right">List</a>
+                    <a href="/member/myPage?loginEmail=${sessionScope.loginEmail}" class="left" style="color: white;">${sessionScope.loginEmail} 님 환영해요!</a>
+                    <a href="/member/logout" class="left">logout</a>
                 </c:when>
-<%--                <c:otherwise>--%>
-<%--                    <a href="/member/login">login</a>--%>
-<%--                </c:otherwise>--%>
+                <c:otherwise>
+                    <a href="/member/login">login</a>
+                    <a href="/member/save">sign-up</a>
+                </c:otherwise>
             </c:choose>
+        </li>
+        <li class="login-name">
+                <c:if test="${sessionScope.loginEmail == 'admin'}">
+                    <a href="/member/manager">manager</a>
+                </c:if>
         </li>
     </ul>
 </div>

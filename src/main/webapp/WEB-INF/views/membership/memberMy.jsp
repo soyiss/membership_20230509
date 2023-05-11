@@ -29,7 +29,11 @@
       <img src="/resources/image/기본%20프로필.png" alt="" width="100" height="100">
     </c:if>
     </div>
-    <button onclick="update()">회원정보수정</button>
+    <c:if test="${sessionScope.loginEmail != 'admin'}">
+      <button onclick="update()">회원정보수정</button>
+      <button onclick="member_delete()">회원탈퇴</button>
+    </c:if>
+
 
 </div>
 
@@ -37,7 +41,11 @@
 </body>
 <script>
   const update = () => {
-    location.href="/member/updatePass?profile=";
+    location.href="/member/updatePass";
+  }
+
+  const member_delete = () => {
+    location.href="/member/deletePass";
   }
 
 

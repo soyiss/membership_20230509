@@ -31,6 +31,10 @@
     float: right;
 }
 
+#nav ul li a.left1{
+    float: left;
+}
+
 #footer {
     text-align: center;
     padding: 20px;

@@ -8,13 +8,14 @@
                 <i class="bi bi-house"></i>
             </a>
         </li>
+<%--   write를 누르면 로그인을 하라고.. 해볼까     --%>
         <li class="login-name">
             <c:choose>
                 <c:when test="${sessionScope.loginEmail != null}">
-                    <a href="/board/write" class="right">Write</a>
-                    <a href="/board/boardList" class="right">List</a>
-                    <a href="/member/myPage?loginEmail=${sessionScope.loginEmail}" class="left" style="color: white;">${sessionScope.loginEmail} 님 환영해요!</a>
-                    <a href="/member/logout" class="left">logout</a>
+                    <a href="/board/write" class="left1">Write</a>
+                    <a href="/board/boardList" class="left1">List</a>
+                    <a href="/member/myPage?loginEmail=${sessionScope.loginEmail}"  style="color: white;">${sessionScope.loginEmail} 님 환영해요!</a>
+                    <a href="/member/logout">logout</a>
                 </c:when>
                 <c:otherwise>
                     <a href="/member/login">login</a>

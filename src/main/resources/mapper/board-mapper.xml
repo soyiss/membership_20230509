@@ -5,4 +5,9 @@
 
 <mapper namespace="Board">
 
+    <insert id="save" parameterType="board">
+        insert into board_table(memberId, boardTitle, boardContents, boardWriter)
+        values (#{memberId}, #{boardTitle}, #{boardContents}, #{boardWriter})
+    </insert>
+
 </mapper>

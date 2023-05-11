@@ -14,6 +14,8 @@
                 <c:when test="${sessionScope.loginEmail != null}">
                     <a href="/board/write" class="left1">Write</a>
                     <a href="/board/boardList" class="left1">List</a>
+                    <a href="/board/paging">pagingList</a>
+
                     <a href="/member/myPage?loginEmail=${sessionScope.loginEmail}"  style="color: white;">${sessionScope.loginEmail} 님 환영해요!</a>
                     <a href="/member/logout">logout</a>
                 </c:when>

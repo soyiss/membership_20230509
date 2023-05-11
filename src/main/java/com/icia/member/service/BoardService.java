@@ -3,6 +3,7 @@ package com.icia.member.service;
 
 import com.icia.member.dto.BoardDTO;
 import com.icia.member.dto.BoardFileDTO;
+import com.icia.member.dto.PageDTO;
 import com.icia.member.repository.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.UUID;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class BoardService {
@@ -75,6 +78,52 @@ public class BoardService {
 
 
         }
+
+    }
+
+    public List<BoardDTO> findAll() {
+        return boardRepository.findAll();
+
+    }
+
+    public List<BoardDTO> pagingList(int page) {
+        int pageLimit = 3; // 한페이지에 보여줄 글 목록 갯수
+        int pagingStart = (page-1) * pageLimit; //사용자가 보고싶은 페이지의 게시글 시작 번호(?)
+        Map<String, Integer> pagingParams = new HashMap<>();
+        pagingParams.put("start", pagingStart);
+        pagingParams.put("Limit", pageLimit);
+        List<BoardDTO> boardDTOList = boardRepository.pagingList(pagingParams);
+        return boardDTOList;
+    }
+
+    public PageDTO pagingParam(int page) {
+        int pageLimit = 3; //한 페이지에 보여줄 글 갯수
+        int blockLimit = 3; //하단에 보여줄 페이지 번호 갯수
+        // 전체 글 갯수 조회
+        int boardCount = boardRepository.boardCount();
+
+        // 전체 페이지 갯수 계산
+        //전체 글게수를 실수로 바꿔서 3의로 나눈 뒤 올림처리를 한 후 정수로 형변환을 해서 maxPage에 담는다
+        int maxPage = (int)(Math.ceil((double)boardCount / pageLimit)); // 정수/정수 = 정수(소수는 버림)-->올림처리를 해서 소수점도 가져가야됨
+
+        //시작 페이지 값 계산(1,4,7,10~~`~`)
+        int startPage = (((int)(Math.ceil((double) page / blockLimit))) - 1) * blockLimit + 1;
+        // 마지막 페이지 값 계산(3,6,9,12~~)
+        int endPage = startPage + blockLimit -1;
+
+        // 전체 페이지 갯수가 계산한 endPage보다 작을 때는 endPAge값을 maxPage 값과 같게 세팅
+        // 맥스랑 앤드를 비교해서 필요없으면 맥스를 앤드로
+        //13게시글에서 엔드를 6으로 했는데 맥스는 5일때 6은 필요없으니까 맥스값을 넣어서 앤드를 5로 해줌
+        if(endPage > maxPage){
+            endPage = maxPage;
+        }
+        PageDTO pageDTO = new PageDTO();
+        pageDTO.setPage(page);
+        pageDTO.setMaxPage(maxPage);
+        pageDTO.setEndPage(endPage);
+        pageDTO.setStartPage(startPage);
+        return pageDTO;
+
 
     }
 }

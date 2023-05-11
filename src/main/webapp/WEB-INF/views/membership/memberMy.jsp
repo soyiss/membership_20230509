@@ -11,6 +11,7 @@
 <head>
   <title>Title</title>
   <link rel="stylesheet" href="/resources/css/main.css">
+  <link rel="stylesheet" href="/resources/image/main.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 <body>
@@ -19,13 +20,15 @@
 <%@include file="../conponent/nav.jsp"%>
 <div id="section">
 
-  ${sessionScope.loginEmail} 님 환영해요!
+  ${sessionScope.loginEmail} 님의 MyPage!
     <div id="file">
     <c:if test="${member.memberProfile == 1}">
         <img src="${pageContext.request.contextPath}/upload/${memberFile.storedFileName}" alt="" width="100" height="100">
     </c:if>
+    <c:if test="${member.memberProfile == 0}">
+      <img src="/resources/image/기본%20프로필.png" alt="" width="100" height="100">
+    </c:if>
     </div>
-    ${member.memberProfile}
     <button onclick="update()">회원정보수정</button>
 
 </div>
@@ -34,7 +37,7 @@
 </body>
 <script>
   const update = () => {
-    location.href="/member/updatePass";
+    location.href="/member/updatePass?profile=";
   }
 
 

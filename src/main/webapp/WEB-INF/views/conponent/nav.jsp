@@ -13,7 +13,6 @@
             <c:choose>
                 <c:when test="${sessionScope.loginEmail != null}">
                     <a href="/board/write" class="left1">Write</a>
-                    <a href="/board/boardList" class="left1">List</a>
                     <a href="/board/paging">pagingList</a>
 
                     <a href="/member/myPage?loginEmail=${sessionScope.loginEmail}"  style="color: white;">${sessionScope.loginEmail} 님 환영해요!</a>
@@ -28,6 +27,8 @@
         <li class="login-name">
                 <c:if test="${sessionScope.loginEmail == 'admin'}">
                     <a href="/member/manager">manager</a>
+
+                    <a href="/board/boardList" class="left1">List</a>
                 </c:if>
         </li>
     </ul>

@@ -15,14 +15,18 @@
 <body>
 
 <%@include file="../conponent/header.jsp"%>
-<%@include file="../conponent/nav.jsp"%>
+<%@include file="../conponent/nav.jsp"%><br>
 <div id="section">
 <%--  ${sessionScope.loginEmail}를 그냥써도 로그인된 상태에서 뜨는 글쓰기니깐 값이 뜬다  --%>
-    <form action="/board/write" method="post" enctype="multipart/form-data">
-        <input type="text" name="boardTitle" placeholder="글 제목"><br>
-        <textarea type="text" name="boardContents" size="500" maxlength=500 placeholder="내용을 작성하세요"></textarea><br>
-        <input type="file" name="boardFile" multiple> <br>
+    <form action="/board/write" method="post" enctype="multipart/form-data"><br>
+        <p></p>
         작성자<input type="text" name="boardWriter" value="${sessionScope.loginEmail}" readonly><br>
+        <input type="text" name="boardTitle" placeholder="글 제목"><br>
+        <p></p>
+        <textarea type="text" name="boardContents" size="500" maxlength=500 placeholder="내용을 작성하세요"></textarea><br>
+        <p></p>
+        <input type="file" name="boardFile" multiple> <br>
+        <p></p>
         <input type="submit" value="글 작성">
     </form>
 </div>

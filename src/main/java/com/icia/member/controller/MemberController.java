@@ -57,7 +57,7 @@ public class MemberController {
         // loginResult가 true이면
         if(loginResult){
             session.setAttribute("loginEmail", memberDTO.getMemberEmail());
-            return "redirect:/board/boardList";
+            return "redirect:/board/paging";
         }else{
             return "/membership/memberLoginError";
         }

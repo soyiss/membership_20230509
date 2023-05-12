@@ -18,7 +18,7 @@
 <body>
 
 <%@include file="../conponent/header.jsp"%>
-<%@include file="../conponent/nav.jsp"%>
+<%@include file="../conponent/nav.jsp"%><br><br>
 <div id="section">
 <%--  <div class="container" id="search-area">--%>
 <%--    &lt;%&ndash;    검색어는 보통 노출이 되니깐 get  &ndash;%&gt;--%>
@@ -40,7 +40,6 @@
         <th>contents</th>
         <th>hits</th>
         <th>date</th>
-        <th>file</th>
 
 
       </tr>
@@ -48,7 +47,7 @@
         <tr>
           <td>${board.id}</td>
           <td>
-            ${board.boardTitle}
+            <a href="/board/detail?id=+${board.id}&page=${paging.page}"> ${board.boardTitle}</a>
           </td>
           <td>${board.boardWriter}</td>
           <td>${board.boardContents}</td>

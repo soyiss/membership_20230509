@@ -87,7 +87,7 @@ public class BoardService {
     }
 
     public List<BoardDTO> pagingList(int page) {
-        int pageLimit = 3; // 한페이지에 보여줄 글 목록 갯수
+        int pageLimit = 5; // 한페이지에 보여줄 글 목록 갯수
         int pagingStart = (page-1) * pageLimit; //사용자가 보고싶은 페이지의 게시글 시작 번호(?)
         Map<String, Integer> pagingParams = new HashMap<>();
         pagingParams.put("start", pagingStart);
@@ -97,7 +97,7 @@ public class BoardService {
     }
 
     public PageDTO pagingParam(int page) {
-        int pageLimit = 3; //한 페이지에 보여줄 글 갯수
+        int pageLimit = 5; //한 페이지에 보여줄 글 갯수
         int blockLimit = 3; //하단에 보여줄 페이지 번호 갯수
         // 전체 글 갯수 조회
         int boardCount = boardRepository.boardCount();
@@ -125,5 +125,25 @@ public class BoardService {
         return pageDTO;
 
 
+    }
+
+    public void updateHits(Long id) {
+        boardRepository.updateHits(id);
+    }
+
+    public BoardDTO findById(Long id) {
+        return boardRepository.findById(id);
+    }
+
+    public List<BoardFileDTO> findFile(Long id) {
+        return boardRepository.findFile(id);
+    }
+
+    public void update(BoardDTO boardDTO) {
+        boardRepository.update(boardDTO);
+    }
+
+    public void delete(BoardDTO boardDTO) {
+        boardRepository.delete(boardDTO);
     }
 }

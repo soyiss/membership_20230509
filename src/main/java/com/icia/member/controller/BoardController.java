@@ -1,11 +1,9 @@
 package com.icia.member.controller;
 
 
-import com.icia.member.dto.BoardDTO;
-import com.icia.member.dto.BoardFileDTO;
-import com.icia.member.dto.MemberDTO;
-import com.icia.member.dto.PageDTO;
+import com.icia.member.dto.*;
 import com.icia.member.service.BoardService;
+import com.icia.member.service.CommentService;
 import com.icia.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +22,9 @@ public class BoardController {
 
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    private CommentService commentService;
 
     @GetMapping("/write")
     public String boardWriteForm(HttpSession session, Model model) {
@@ -90,17 +91,31 @@ public class BoardController {
     @GetMapping("/detail")
     public String detailForm(@RequestParam("id") Long id,
                              @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                             @RequestParam(value = "q", required = false, defaultValue = "") String q,
+                             @RequestParam(value = "type",required = false, defaultValue = "boardTitle") String type,
                              Model model) {
         //조회수를 1씩 증가시키는 메소드이다
         boardService.updateHits(id);
         BoardDTO boardDTO = boardService.findById(id);
         model.addAttribute("board", boardDTO);
         model.addAttribute("page", page);
+        model.addAttribute("q",q);
+        model.addAttribute("type", type);
         if (boardDTO.getFileAttached() == 1) {
             // 파일이 있는 게시글을 선택하면
             List<BoardFileDTO> boardFileDTO = boardService.findFile(id);
             model.addAttribute("boardFileList", boardFileDTO);
             System.out.println("boardFileDTO = " + boardFileDTO);
+        }
+        //댓글을 가져와야됨
+        //매개변수의 id는 게시글의 id이다
+        List<CommentDTO> commentDTOList = commentService.findAll(id);
+        if (commentDTOList.size() == 0) {
+            //댓글이 없으면 list에 null적용
+            model.addAttribute("commentList", null);
+        } else {
+            //댓글이 있으면 서버에서 가져온 commentDTOList를 넘겨준다
+            model.addAttribute("commentList", commentDTOList);
         }
         return "boards/boardDetail";
     }

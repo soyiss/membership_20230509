@@ -9,21 +9,20 @@
             </a>
         </li>
         <li>
-            <a href="/board/write">Write</a>
-        </li>
-        <li>
             <a href="/board/paging">pagingList</a>
         </li>
-
 <%--   write를 누르면 로그인을 하라고.. 해볼까     --%>
         <li class="login-name">
             <c:choose>
                 <c:when test="${sessionScope.loginEmail != null}">
+                    <a href="/board/write" class="left1">Write</a>
                     <a href="/member/myPage?loginEmail=${sessionScope.loginEmail}"  style="color: white;">${sessionScope.loginEmail} 님 환영해요!</a>
                     <a href="/member/logout">logout</a>
                 </c:when>
                 <c:otherwise>
                     <a href="/member/login">login</a>
+
+
                     <a href="/member/save">sign-up</a>
                 </c:otherwise>
             </c:choose>

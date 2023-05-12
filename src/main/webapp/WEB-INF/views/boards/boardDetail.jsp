@@ -60,13 +60,6 @@
                         <img src="${pageContext.request.contextPath}/upload/${boardFile.storedFileName}" alt=""
                              width="100" height="100">
                     </c:forEach>
-
-<%--                    if(작성자가 로그인된 이메일이랑 같으면){--%>
-<%--                        if(같은 조건에서 추가로 admin이면 ){--%>
-<%--                            삭제만 보인다--%>
-<%--                        }--%>
-<%--                            수정과 삭제가 보이고--%>
-<%--                    }--%>
                 </td>
             </tr>
         </c:if>
@@ -83,9 +76,43 @@
             <button onclick="board_delete()">삭제</button>
         </c:when>
     </c:choose>
+    <div id="comment-write-area">
+        댓글 작성자<input type="text" name="commentWriter" id="comment-writer" value="${sessionScope.loginEmail}"
+                     readonly><br>
+        <input type="text" name="commentContents" id="comment-contents" placeholder="댓글 내용"><br>
+        <button onclick="comment_write()">댓글작성</button>
+    </div>
 
+    <div id="comment-list">
+        <%-- 가져온 commentDTOList를 뿌려준다--%>
+        <c:choose>
+            <c:when test="${commentList == null}">
+                <h5>현재 작성된 댓글이 없습니다.</h5>
+            </c:when>
+            <c:otherwise>
+                <table>
+                    <tr>
+                        <th>id</th>
+                        <th>작성자</th>
+                        <th>내용</th>
+                        <th>작성시간</th>
+                    </tr>
+                    <c:forEach items="${commentList}" var="comment">
+                        <tr>
+                            <td>${comment.id}</td>
+                            <td>${comment.commentWriter}</td>
+                            <td>${comment.commentContents}</td>
+                            <td>
+                                <fmt:formatDate value="${comment.commentCreatedDate}"
+                                                pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </c:otherwise>
+        </c:choose>
+    </div>
 
-    <br>
 
 </div>
 <%@include file="../conponent/footer.jsp" %>
@@ -103,6 +130,51 @@
     const board_delete = () => {
         const id = '${board.id}';
         location.href = "/board/board_delete?id=" + id;
+    }
+
+    const comment_write = () => {
+        const commentWriter = document.getElementById("comment-writer").value;
+        const commentContents = document.getElementById("comment-contents").value;
+        const boardId = '${board.id}';
+        const memberId = '${board.memberId}';
+        const result = document.getElementById("comment-list");
+
+        $.ajax({
+            type: "post",
+            url: "/comment/save",
+            data: {
+                "commentWriter": commentWriter,
+                "commentContents": commentContents,
+                "boardId": boardId,
+                "memberId": memberId
+            },
+            success: function (res) {
+                let output = "<table>";
+                output += "<tr>";
+                output += "<th>id</th>";
+                output += "<th>작성자</th>";
+                output += "<th>내용</th>";
+                output += "<th>작성시간</th>";
+                output += "</tr>";
+                for (let i in res) {
+                    output += "<tr>";
+                    output += "<td>" + res[i].id + "</td>";
+                    output += "<td>" + res[i].commentWriter + "</td>";
+                    output += "<td>" + res[i].commentContents + "</td>";
+                    output += "<td>" + moment(res[i].commentCreatedDate).format("YYYY-MM-DD HH:mm:ss") + "</td>";
+                    output += "</tr>";
+                }
+                output += "</table>";
+                result.innerHTML = output;
+                //인풋태그를 비우는 역할
+                document.getElementById("comment-contents").value = "";
+            },
+            error: function () {
+                console.log("실패");
+            }
+
+        });
+
     }
 </script>
 </html>

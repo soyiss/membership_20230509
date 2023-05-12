@@ -47,7 +47,7 @@
         <tr>
           <td>${board.id}</td>
           <td>
-            <a href="/board/detail?id=+${board.id}&page=${paging.page}&q=${q}&type=${type}"> ${board.boardTitle}</a>
+            <a href="/board/detail?id=${board.id}&page=${paging.page}&q=${q}&type=${type}"> ${board.boardTitle}</a>
           </td>
           <td>${board.boardWriter}</td>
           <td>${board.boardContents}</td>

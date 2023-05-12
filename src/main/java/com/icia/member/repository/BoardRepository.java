@@ -56,4 +56,12 @@ public class BoardRepository {
     public void delete(BoardDTO boardDTO) {
         sql.delete("Board.delete",boardDTO);
     }
+
+    public List<BoardDTO> searchList(Map<String, Object> pagingParams) {
+        return sql.selectList("Board.search", pagingParams);
+    }
+
+    public int boardSearchCount(Map<String, Object> pagingParams) {
+        return sql.selectOne("Board.searchCount", pagingParams);
+    }
 }

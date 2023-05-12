@@ -56,19 +56,34 @@ public class BoardController {
     //required = false를 써서 page는 필수 옵션이 아니여도된다고 하고 page 파라미터가 없으면 기본겂으로 1로 지정해줌
     //page에 특정값이 있으면 파라미터로 넘어오고 없으면 1로 세팅하겠다는 뜻
     @GetMapping("/paging")
-    public String paging(@RequestParam(value = "page", required = false, defaultValue = "1") int page, Model model) {
-        System.out.println("페이징 page = " + page);
+    public String paging(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                         @RequestParam(value = "q", required = false, defaultValue = "") String q,
+                         @RequestParam(value = "type",required = false, defaultValue = "boardTitle") String type,
+                         Model model) {
+        System.out.println("페이징 page = " + page + ", q = " + q+",type= "+type);
         List<BoardDTO> boardDTOList = null;
         PageDTO pageDTO = null;
-        // 사용자가 요청한 페이지에 해당하는 글 목록 데이터
-        // 사용자가 3페이지를 보고싶다 하면 3페이지에 해당하는 내용 목록들
-        boardDTOList = boardService.pagingList(page);
-        // 하단에 보여줄 페이지 번호 목록 데이터
-        pageDTO = boardService.pagingParam(page);
+
+        //검색어 q값이 없으면 일반 페이징 처리를해라
+        if(q.equals("")){
+            // 사용자가 요청한 페이지에 해당하는 글 목록 데이터
+            // 사용자가 3페이지를 보고싶다 하면 3페이지에 해당하는 내용 목록들
+            boardDTOList = boardService.pagingList(page);
+            // 하단에 보여줄 페이지 번호 목록 데이터
+            pageDTO = boardService.pagingParam(page);
+
+        //검색어 q값이 있으면 검색어가 포함된 페이징 처리를 해라
+        }else{
+            // 검색어가 있으면 검색어가 포함된 페이징 처리를 해라
+            boardDTOList = boardService.searchList(page,type,q);
+            pageDTO = boardService.pagingSearchParam(page,type,q);
+        }
         // 페이지에 들어가는 글 목록들
         model.addAttribute("boardList", boardDTOList);
         // 하단에 보여줄 페이지 목록들
         model.addAttribute("paging", pageDTO);
+        model.addAttribute("q", q);
+        model.addAttribute("type",type);
         return "boards/boardPaging";
     }
 

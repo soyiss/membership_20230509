@@ -136,7 +136,6 @@
         const commentWriter = document.getElementById("comment-writer").value;
         const commentContents = document.getElementById("comment-contents").value;
         const boardId = '${board.id}';
-        const memberId = '${board.memberId}';
         const result = document.getElementById("comment-list");
 
         $.ajax({

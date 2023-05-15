@@ -49,6 +49,9 @@ public class CommentController {
     }
 
     @GetMapping("/comment_delete")
+//    /board/detal로 주소를 다시 redirect 요청을 할때 page,q,type,boardId값이 필요해서 같이 보내줘야되는데
+//    model에는 detail에서 이미 파라미터를 담아서 안써도된다 보내주기만 하면된다
+//    리다이렉트로 재요청할때 commentId는 보드디티오에는 없는 값이므로 주소에 같이 안보내줘도된다
     public String delete(@RequestParam("id") Long id,
                          @RequestParam(value = "page", required = false, defaultValue = "1") int page,
                          @RequestParam(value = "q", required = false, defaultValue = "") String q,

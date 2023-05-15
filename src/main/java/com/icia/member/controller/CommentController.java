@@ -1,5 +1,7 @@
 package com.icia.member.controller;
 
+import com.icia.member.dto.BoardDTO;
+import com.icia.member.dto.BoardFileDTO;
 import com.icia.member.dto.CommentDTO;
 import com.icia.member.dto.MemberDTO;
 import com.icia.member.service.CommentService;
@@ -8,10 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -35,7 +35,8 @@ public class CommentController {
         System.out.println("난난난commentDTO = " + commentDTO);
         String loginEmail = (String) session.getAttribute("loginEmail");
         MemberDTO memberDTO = memberService.findByMemberEmail(loginEmail);
-        boardDTO.setMemberId(memberDTO.getId());
+
+        commentDTO.setMemberId(memberDTO.getId());
 
         //서버로 가자~!
         commentService.save(commentDTO);
@@ -45,5 +46,18 @@ public class CommentController {
         List<CommentDTO> commentDTOList = commentService.findAll(commentDTO.getBoardId());
         System.out.println("아아아commentDTOList = " + commentDTOList);
         return new ResponseEntity<>(commentDTOList, HttpStatus.OK);
+    }
+
+    @GetMapping("/comment_delete")
+    public String delete(@RequestParam("id") Long id,
+                         @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                         @RequestParam(value = "q", required = false, defaultValue = "") String q,
+                         @RequestParam(value = "type",required = false, defaultValue = "boardTitle") String type,
+                         @RequestParam("boardId") Long boardId){
+        System.out.println("id = " + id);
+        System.out.println("boardId = " + boardId);
+        commentService.delete(id);
+        System.out.println("id = " + id);
+        return "redirect:/board/detail?id=" + boardId + "&page=" + page + "&q="+ q +"&type="+type;
     }
 }

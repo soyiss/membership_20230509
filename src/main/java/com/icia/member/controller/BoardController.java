@@ -116,6 +116,7 @@ public class BoardController {
         } else {
             //댓글이 있으면 서버에서 가져온 commentDTOList를 넘겨준다
             model.addAttribute("commentList", commentDTOList);
+            System.out.println("야야야commentDTOList = " + commentDTOList);
         }
         return "boards/boardDetail";
     }

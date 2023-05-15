@@ -21,4 +21,16 @@ public class CommentService {
 
         return commentRepository.findAll(boardId);
     }
+
+    public CommentDTO findById(Long id) {
+        return commentRepository.findById(id);
+    }
+
+//    public void delete(CommentDTO commentDTO) {
+//        commentRepository.delete(commentDTO);
+//    }
+
+    public void delete(Long id) {
+        commentRepository.delete(id);
+    }
 }

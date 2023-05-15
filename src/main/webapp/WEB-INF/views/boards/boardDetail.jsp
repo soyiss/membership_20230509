@@ -106,6 +106,17 @@
                                 <fmt:formatDate value="${comment.commentCreatedDate}"
                                                 pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate>
                             </td>
+                            <td>
+                                <button style="border: none;"><i class="bi bi-hand-thumbs-up"></i></button>
+                            </td>
+                            <td>
+                                <c:choose>
+                                    <%--    작성자와 로그인한 이메일이 같을때 그리고 로그인한 이메일이 admin이 아닐때 수정 삭제 버튼을 띄우게 해라    --%>
+                                    <c:when test="${comment.commentWriter == sessionScope.loginEmail || sessionScope.loginEmail == 'admin'}">
+                                        <button onclick="comment_delete('${comment.id}')">삭제</button>
+                                    </c:when>
+                                </c:choose>
+                            </td>
                         </tr>
                     </c:forEach>
                 </table>
@@ -144,8 +155,7 @@
             data: {
                 "commentWriter": commentWriter,
                 "commentContents": commentContents,
-                "boardId": boardId,
-                "memberId": memberId
+                "boardId": boardId
             },
             success: function (res) {
                 let output = "<table>";
@@ -161,6 +171,7 @@
                     output += "<td>" + res[i].commentWriter + "</td>";
                     output += "<td>" + res[i].commentContents + "</td>";
                     output += "<td>" + moment(res[i].commentCreatedDate).format("YYYY-MM-DD HH:mm:ss") + "</td>";
+                    output += "<td><button onclick='comment_delete(" + res[i].id + ")'>삭제</button></td>";
                     output += "</tr>";
                 }
                 output += "</table>";
@@ -174,6 +185,16 @@
 
         });
 
+
+    }
+    const comment_delete = (id) => {
+        <%--const id = '${commentList.id}';--%>
+        <%--const boardId = '${commentlist.boardId}';--%>
+        const boardId = '${board.id}';
+        const page = '${page}';
+        const q = '${q}';
+        const type = '${type}';
+        location.href = "/comment/comment_delete?id=" + id + "&page=" + page + "&q="+ q +"&type="+type+"&boardId="+boardId;
     }
 </script>
 </html>

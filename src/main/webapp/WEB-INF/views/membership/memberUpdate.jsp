@@ -11,6 +11,9 @@
   <title>Title</title>
   <link rel="stylesheet" href="/resources/css/main.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <style>
+
+  </style>
 </head>
 <body>
 

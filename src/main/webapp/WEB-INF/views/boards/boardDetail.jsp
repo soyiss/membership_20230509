@@ -16,6 +16,9 @@
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <%--  시간 형식을 맞출때 사용하는 라이브러리  --%>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <style>
+
+    </style>
 </head>
 <body>
 
@@ -64,23 +67,23 @@
             </tr>
         </c:if>
     </table>
-    <button onclick="board_list()">목록</button>
+    <button onclick="board_list()" class="com1">목록</button>
     <c:choose>
         <%--    작성자와 로그인한 이메일이 같을때 그리고 로그인한 이메일이 admin이 아닐때 수정 삭제 버튼을 띄우게 해라    --%>
         <c:when test="${board.boardWriter == sessionScope.loginEmail && sessionScope.loginEmail != 'admin'}">
-            <button onclick="board_update()">수정</button>
-            <button onclick="board_delete()">삭제</button>
+            <button onclick="board_update()" class="com1">수정</button>
+            <button onclick="board_delete()" class="com1">삭제</button>
         </c:when>
         <%--    로그인한 이메일이 admin일때 삭제 버튼을 띄우게 해라     --%>
         <c:when test="${sessionScope.loginEmail  == 'admin'}">
-            <button onclick="board_delete()">삭제</button>
+            <button onclick="board_delete()" class="com1">삭제</button>
         </c:when>
     </c:choose>
     <div id="comment-write-area">
         댓글 작성자<input type="text" name="commentWriter" id="comment-writer" value="${sessionScope.loginEmail}"
-                     readonly><br>
+                     readonly class="com1"><br>
         <input type="text" name="commentContents" id="comment-contents" placeholder="댓글 내용"><br>
-        <button onclick="comment_write()">댓글작성</button>
+        <button onclick="comment_write()" class="com1">댓글작성</button>
     </div>
 
     <div id="comment-list">
@@ -96,6 +99,7 @@
                         <th>작성자</th>
                         <th>내용</th>
                         <th>작성시간</th>
+                        <th></th>
                     </tr>
                     <c:forEach items="${commentList}" var="comment">
                         <tr>

@@ -16,7 +16,7 @@
     </insert>
 
     <select id="findAll" resultType="board">
-        select * from board_table
+        select * from board_table order by boardHits desc
     </select>
 
     <select id="paging" parameterType="java.util.HashMap" resultType="board">
@@ -47,7 +47,7 @@
     </delete>
 
     <select id="search" parameterType="java.util.HashMap" resultType="board">
-        select * from board_table where ${type} like concat('%', #{q}, '%') order by id desc limit #{start}, #{limit}
+        select * from board_table where ${type} like concat('%', #{q}, '%') order by id desc, boardHits desc limit #{start}, #{limit}
     </select>
 
     <select id="searchCount" parameterType="java.util.HashMap" resultType="Integer">

@@ -12,6 +12,18 @@
   <title>Title</title>
   <link rel="stylesheet" href="/resources/css/main.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <style>
+
+    #section table{
+      margin: 0 auto;
+      margin-top: 50px;
+    }
+    #section table tr,th,td{
+      text-align: center;
+      border: solid 1px black;
+      padding: 10px 20px;
+    }
+  </style>
 </head>
 <body>
 

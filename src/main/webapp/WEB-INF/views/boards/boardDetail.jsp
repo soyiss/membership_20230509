@@ -107,9 +107,6 @@
                                                 pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate>
                             </td>
                             <td>
-                                <button style="border: none;"><i class="bi bi-hand-thumbs-up"></i></button>
-                            </td>
-                            <td>
                                 <c:choose>
                                     <%--    작성자와 로그인한 이메일이 같을때 그리고 로그인한 이메일이 admin이 아닐때 수정 삭제 버튼을 띄우게 해라    --%>
                                     <c:when test="${comment.commentWriter == sessionScope.loginEmail || sessionScope.loginEmail == 'admin'}">
@@ -186,6 +183,9 @@
         });
 
 
+    }
+    const love = () => {
+      location.href="/";
     }
     const comment_delete = (id) => {
         <%--const id = '${commentList.id}';--%>

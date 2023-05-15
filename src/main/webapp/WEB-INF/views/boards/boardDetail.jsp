@@ -184,9 +184,7 @@
 
 
     }
-    const love = () => {
-      location.href="/";
-    }
+
     const comment_delete = (id) => {
         <%--const id = '${commentList.id}';--%>
         <%--const boardId = '${commentlist.boardId}';--%>
